@@ -6,7 +6,24 @@
 
 ## scale-out and scale-in 
 
-![scale-out and scale-in ](./static/AB3-scale.jpg "scale-out and scale-in ")
+![scale-out and scale-in](./static/AB3-scale.jpg "scale-out and scale-in")
+
+## development guidance
+
+![AB3-steps](./static/AB3-steps.jpg "AB3-steps")
+
+## taint examples:
+
+
+node tainted with **agones.dev/gameservers** is managed by agones
+
+node tainted with **gamelift.status/active** is ready for agones allocation
+
+![AB3-taint1](./static/AB3-taint1.jpg "AB3-taint1")
+
+node tainted with **gamelift.status/draining** is no suitbale for new sesssion
+
+![AB3-taint2](./static/AB3-taint2.jpg "AB3-taint2")
 
 ## reference
 
