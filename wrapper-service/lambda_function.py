@@ -131,6 +131,17 @@ def read_namespaced_pod(params):
     return pods
     pass
 
+def delete_namespaced_pod(params):
+    PodName = params.get('name')
+    try:
+        pod = kubernetes_tools.core_v1_client.delete_namespaced_pod(name=PodName, namespace="default")
+        print(pod)
+    except ApiException as e:
+        print_messageId(f'Exception when calling CoreV1Api->read_namespaced_pod: {e}\n', flush=True)
+
+    return {"podname": PodName}
+    pass
+
 def list_game_server(params):
     custom_objs = list_cluster_custom_object_all()
     if custom_objs is None:
@@ -186,6 +197,7 @@ actiondict = {
     'deregister_game_server_instances': deregister_game_server_instances,
     'list_node': list_node,
     'read_namespaced_pod': read_namespaced_pod,
+    'delete_namespaced_pod': delete_namespaced_pod,
     'list_game_server': list_game_server,
     'allocate_game_server': allocate_game_server
 }
