@@ -1,5 +1,9 @@
 # fleetiq-agones-adaptor
 
+## introduction
+
+this project is designed as an adaptor between FleeIQ and Agones to take advantages of Spot low price and EKS agility.
+
 ## architecture 
 
 ![system architecture](./static/AB3-AB3.jpg "system architecture")
@@ -14,16 +18,15 @@
 
 ## taint examples:
 
-
 node tainted with **agones.dev/gameservers** is managed by agones
 
 node tainted with **gamelift.status/active** is ready for agones allocation
 
-![AB3-taint1](./static/AB3-taint1.jpg "AB3-taint1")
+![AB3-taint1](./static/AB3-taint1.jpg "AB3-taint1"){ width=50% }
 
 node tainted with **gamelift.status/draining** is no suitbale for new sesssion
 
-![AB3-taint2](./static/AB3-taint2.jpg "AB3-taint2")
+![AB3-taint2](./static/AB3-taint2.jpg "AB3-taint2"){ width=50% }
 
 ## reference
 
