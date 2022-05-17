@@ -1,0 +1,13 @@
+apiVersion: "agones.dev/v1"
+kind: GameServer
+metadata:
+  name: minetest
+spec:
+  ports:
+    - name: default
+      containerPort: 30000
+  template:
+    spec:
+      containers:
+      - name: minetest
+        image: paulhkim80/agones-example-minetest:1.0.0

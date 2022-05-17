@@ -1,0 +1,88 @@
+# Copyright 2020 Google LLC All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: "agones.dev/v1"
+kind: Fleet
+metadata:
+  name: minetest
+spec:
+  replicas: 2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+        labels:
+          app: minetest
+    spec:
+      health:
+        failureThreshold: 3
+        initialDelaySeconds: 30
+        periodSeconds: 10
+    spec:
+      ports:
+      - name: minetest
+        containerPort: 30000
+      health:
+        initialDelaySeconds: 30
+        periodSeconds: 60
+      template:
+        spec:
+          containers:
+            - name: minetest
+              image: paulhkim80/agones-example-minetest:1.0.0
+              resources: 
+                requests:
+                  memory: "500Mi"
+                  cpu: "0.5"
+                limits:
+                  memory: "1Gi"
+                  cpu: "1"
+              env:
+                - name: WAIT_TO_PLAYERS
+                  value: '120'
+                - name: FREQ_CHECK_SESSION
+                  value: '10'
+                - name: NUM_IDLE_SESSION
+                  value: '5'
+                - name: SHARED_FOLDER
+                  value: /sharedata
+                - name: WAIT_TO_PLAYERS
+                  value: '120'
+                - name: GAME_SERVER_GROUP_NAME
+                  value: agones-game-server-group-01
+                - name: GAME_MODE
+                  value: "1"
+                - name: POD_NAME
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.name
+                - name: NAMESPACE
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.namespace
+              imagePullPolicy: Always
+          nodeSelector:
+            role: game-servers-1
+          tolerations:
+            - effect: NoExecute
+              key: agones.dev/gameservers
+              operator: Equal
+              value: 'true'
+            - effect: NoExecute
+              key: gamelift.status/active
+              operator: Equal
+              value: 'true'
+          volumes:
+            - emptyDir: {}
+              name: shared-data

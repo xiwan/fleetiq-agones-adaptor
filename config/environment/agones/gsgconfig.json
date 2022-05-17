@@ -1,0 +1,27 @@
+{
+"GameServerGroupName": "agones-game-server-group-01",
+"RoleArn": "arn:aws:iam::614954710407:role/GameLiftServerGroupRole",
+"MinSize": 1,
+"MaxSize": 10,
+"LaunchTemplate": {
+"LaunchTemplateId": "lt-0a2f53bf7452ee564",
+"Version": "1"
+},
+"InstanceDefinitions": [
+{
+"InstanceType": "c5.xlarge",
+"WeightedCapacity": "2"
+},
+{
+"InstanceType": "c4.xlarge",
+"WeightedCapacity": "1"
+}
+],
+"BalancingStrategy": "SPOT_PREFERRED",
+"GameServerProtectionPolicy": "FULL_PROTECTION",
+"VpcSubnets": [
+  "subnet-0e16a8457b80a1774",
+  "subnet-05f541b352032dd3c",
+  "subnet-0f66d0886ebb1f766"
+]
+}
