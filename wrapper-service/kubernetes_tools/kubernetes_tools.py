@@ -1,4 +1,4 @@
-import json
+import json, os
 from kubernetes import client, config
 from kubernetes.client.rest import ApiException
 
@@ -9,8 +9,8 @@ from kubernetes.client.rest import ApiException
 #kubectl get secret -n kube-system ${SECRET} -o json | jq -Mr '.data["ca.crt"]' | base64 -d > /tmp/ca.crt  
 #APISERVER=$(kubectl config view --minify | grep server | cut -f 2- -d ":" | tr -d " ")
 
-kube_url = 'xxxxxx'
-kube_token = 'xxxxxxx'
+kube_url = os.getenv('kube_url')
+kube_token = os.getenv('kube_token')
 
 class KubernetesTools(object):
     def __init__(self):
