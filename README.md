@@ -22,11 +22,11 @@ node tainted with **agones.dev/gameservers** is managed by agones
 
 node tainted with **gamelift.status/active** is ready for agones allocation
 
-![AB3-taint1](./static/AB3-taint1.jpg "AB3-taint1"){ width=50% }
+![AB3-taint1](./static/AB3-taint1.jpg "AB3-taint1"){:width=50% }
 
 node tainted with **gamelift.status/draining** is no suitbale for new sesssion
 
-![AB3-taint2](./static/AB3-taint2.jpg "AB3-taint2"){ width=50% }
+![AB3-taint2](./static/AB3-taint2.jpg "AB3-taint2"){:width=50% }
 
 ## reference
 
